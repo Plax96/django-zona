@@ -1,0 +1,13 @@
+{% extends 'buffete/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if caso.fecha_ingreso %}
+            <div class="date">
+                {{ caso.fecha_ingreso }}
+            </div>
+        {% endif %}
+        <h1>{{ caso.resumen }}</h1>
+        <p>{{ caso.descripcion|linebreaksbr }}</p>
+    </div>
+{% endblock %}

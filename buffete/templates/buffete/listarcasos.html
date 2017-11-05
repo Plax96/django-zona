@@ -1,18 +1,13 @@
-<html>
-       <head>
-           <title>Django Girls blog</title>
-       </head>
-       <body>
-         <div>
-     <h1><a href="/">Django Girls Blog</a></h1>
- </div>
+{% extends 'buffete/base.html' %}
 
- {% for post in casos %}
-     <div>
-         <p>published: {{ post.published_date }}</p>
-         <h1><a href="">{{ post.title }}</a></h1>
-         <p>{{ post.text|linebreaksbr }}</p>
-     </div>
- {% endfor %}
-       </body>
-   </html>
+{% block content %}
+    {% for post in casos %}
+        <div class="post">
+            <div class="date">
+                {{ post.fecha_ingreso }}
+            </div>
+            <h1><a href="{% url 'detalle_caso' id=post.id %}">{{ post.resumen }}</a></h1>
+            <p>{{ post.descripcion|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
