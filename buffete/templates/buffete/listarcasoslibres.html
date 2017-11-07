@@ -6,8 +6,10 @@
             <div class="date">
                 {{ post.fecha_ingreso }}
             </div>
-            <h1><a href="{% url 'detalle_caso' id=post.id %}">{{ post.resumen }}</a></h1>
+            <h1><a href="{% url 'detalle_caso' iden=post.id %}">{{ post.resumen }}</a></h1>
+            <h2>{{post.abogado}}</h2><h2>{{post.cliente}}</h2>
             <p>{{ post.descripcion|linebreaksbr }}</p>
+
         </div>
     {% endfor %}
 {% endblock %}

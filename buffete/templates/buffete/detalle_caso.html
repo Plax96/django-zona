@@ -1,13 +1,28 @@
 {% extends 'buffete/base.html' %}
 
 {% block content %}
+
+
     <div class="post">
-        {% if caso.fecha_ingreso %}
-            <div class="date">
-                {{ caso.fecha_ingreso }}
-            </div>
+        {% if caso.fecha_inicio %}
+          <div class="date">
+              {{ caso.fecha_inicio }}
+          </div>
+          <a class="btn btn-default" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+          <h1>{{ caso.resumen }}</h1>
+          <h2>{{caso.abogado}}{{caso.cliente}}</h2>
+          <p>{{ caso.descripcion|linebreaksbr }}</p>
+
+        {% else %}
+        <div class="post">
+              <a class="btn btn-default" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <p class="date">created: {{ caso.fecha_ingreso|date:'d-m-Y' }}</p>
+              <h1><a href="{% url 'detalle_caso' iden=caso.pk %}">{{ caso.resumen }}</a></h1>
+              <h2>{{caso.abogado}}{{caso.cliente}}</h2>
+              <p>{{ caso.descripcion|truncatechars:200 }}</p>
+          </div>
+
         {% endif %}
-        <h1>{{ caso.resumen }}</h1>
-        <p>{{ caso.descripcion|linebreaksbr }}</p>
+
     </div>
 {% endblock %}
