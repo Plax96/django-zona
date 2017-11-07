@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class ExpedienteForm(forms.ModelForm):
     class Meta:
         model = Expediente
-        fields = ('estado','resumen','descripcion','cliente','abogado')
+        fields = ('estado','resumen','descripcion','cliente','abogado','fecha_inicio')
 
 class AbogadoForm(forms.ModelForm):
     class Meta:

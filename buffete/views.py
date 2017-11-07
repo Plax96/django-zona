@@ -15,6 +15,11 @@ def listarcasosllevados(request):
     return render(request, 'buffete/listarcasosocupados.html',{'casos':casos})
 
 @login_required
+def listarcasosterminados(request):
+    casos=Expediente.objects.filter(estado='3').order_by('fecha_finalizacion')
+    return render(request, 'buffete/listarcasosterminados.html',{'casos':casos})
+
+@login_required
 def detalle_caso(request,iden):
     caso = get_object_or_404(Expediente, id=iden)
     return render(request, 'buffete/detalle_caso.html',{'caso':caso})
@@ -41,6 +46,7 @@ def caso_editar(request, iden):
             expediente = exp.save(commit = False)
             if exp.cleaned_data['abogado']:
                 expediente.estado="2"
+                expediente.fecha_inicio=timezone.now()
             else:
                 expediente.estado="1"
             expediente.author = request.user
@@ -50,6 +56,11 @@ def caso_editar(request, iden):
         expediente = ExpedienteForm(instance=post)
     return render(request, 'buffete/caso_editar.html', {'form':expediente})
 
+@login_required
+def terminar_caso(request,iden):
+    caso=get_object_or_404(Expediente,id=iden)
+    caso.terminar_caso()
+    return redirect('detalle_caso',iden=id)
 
 @login_required
 def eliminar_cliente(request,id):

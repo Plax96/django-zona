@@ -32,6 +32,11 @@ class Expediente(models.Model):
     abogado = models.ForeignKey(Abogado, on_delete = models.CASCADE, blank=True, null=True)
     cliente = models.ForeignKey(Cliente, on_delete = models.CASCADE)
 
+    def terminar(self):
+        self.fecha_finalizacion = timezone.now()
+        self.estado="3"
+        self.save()
+
 
 
 
