@@ -31,7 +31,9 @@ class Expediente(models.Model):
     estado = models.CharField(max_length=2,default="1")
     abogado = models.ForeignKey(Abogado, on_delete = models.CASCADE, blank=True, null=True)
     cliente = models.ForeignKey(Cliente, on_delete = models.CASCADE)
-
+    def __str__(self):
+        return self.resumen
+    
     def terminar(self):
         self.fecha_finalizacion = timezone.now()
         self.estado="3"

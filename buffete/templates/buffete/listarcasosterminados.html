@@ -6,7 +6,7 @@
 
          <div class="resume-item d-flex flex-column flex-md-row mb-5">
            <div class="resume-content mr-auto">
-             <h3 class="mb-0">{{ post.resumen }}</h3>
+             <h3 class="mb-0"><a href="{% url 'detalle_caso' iden=post.pk %}">{{ post.resumen }}</a></h3>
              <div class="subheading mb-3">Abogado: {{post.abogado}}</div> <div class="subheading mb-4">Cliente:  {{post.cliente}}</div>
                          <p>{{ post.descripcion|linebreaksbr }}</p>
           </div>

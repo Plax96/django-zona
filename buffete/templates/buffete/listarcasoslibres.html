@@ -2,27 +2,11 @@
 
 {% block content %}
     {% for post in casos %}
-        <div class="post">
-            <div class="date">
-                {{ post.fecha_ingreso }}
-            </div>
-            <h1><a href="{% url 'detalle_caso' iden=post.id %}">{{ post.resumen }}</a></h1>
-            <h2>{{post.abogado}}</h2><h2>{{post.cliente}}</h2>
-            <p>{{ post.descripcion|linebreaksbr }}</p>
-
-        </div>
-    {% endfor %}
-{% endblock %}
-
-{% extends 'buffete/base.html' %}
-
-{% block content %}
-    {% for post in casos %}
     <h2 class="mb-5">CASOS LIBRES</h2>
 
          <div class="resume-item d-flex flex-column flex-md-row mb-5">
            <div class="resume-content mr-auto">
-             <h3 class="mb-0">{{ post.resumen }}</h3>
+             <h3 class="mb-0"><a href="{% url 'caso_editar' iden=post.pk %}">{{ post.resumen }}</a></h3>
                 <div class="subheading mb-4">Cliente:  {{post.cliente}}</div>
                          <p>{{ post.descripcion|linebreaksbr }}</p>
           </div>

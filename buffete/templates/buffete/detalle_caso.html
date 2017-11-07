@@ -4,21 +4,27 @@
 
 
     <div class="post">
-        {% if caso.fecha_inicio %}
+        {% if caso.fecha_finalizacion %}
+          <h1>Terminado</h1
+          <h1><a href="{% url 'detalle_caso' iden=caso.pk %}">{{ caso.resumen }}</a></h1>
+          <h2>{{caso.abogado}}{{caso.cliente}}</h2>
+          <p>{{ caso.descripcion|linebreaksbr }}</p>
+        {% elif caso.fecha_inicio %}
           <div class="date">
               {{ caso.fecha_inicio }}
           </div>
-          <a class="btn btn-default" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-          <h1>{{ caso.resumen }}</h1>
+          <a class="btn btn-primary" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil">Editar</span></a>
+          <a class="btn btn-primary" href="{% url 'terminar_caso' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil">Cerrar Caso</span></a>
+          <h1><a href="{% url 'detalle_caso' iden=caso.pk %}">{{ caso.resumen }}</a></h1>
           <h2>{{caso.abogado}}{{caso.cliente}}</h2>
           <p>{{ caso.descripcion|linebreaksbr }}</p>
 
         {% else %}
         <div class="post">
-              <a class="btn btn-default" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+              <a class="btn btn-primary" href="{% url 'caso_editar' iden=caso.pk %}"><span class="glyphicon glyphicon-pencil">Editar</span></a>
               <p class="date">created: {{ caso.fecha_ingreso|date:'d-m-Y' }}</p>
               <h1><a href="{% url 'detalle_caso' iden=caso.pk %}">{{ caso.resumen }}</a></h1>
-              <h2>{{caso.abogado}}{{caso.cliente}}</h2>
+              <h2>Abogado: {{caso.abogado}}  Cliente: {{caso.cliente}}</h2>
               <p>{{ caso.descripcion|truncatechars:200 }}</p>
           </div>
 

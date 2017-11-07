@@ -15,6 +15,11 @@ def listarcasosllevados(request):
     return render(request, 'buffete/listarcasosocupados.html',{'casos':casos})
 
 @login_required
+def listarclientes(request):
+    cliente=Cliente.objects.filter(estado=True).order_by('nombre')
+    return render(request, 'buffete/listarclientes.html',{'clientes':cliente})
+
+@login_required
 def listarcasosterminados(request):
     casos=Expediente.objects.filter(estado='3').order_by('fecha_finalizacion')
     return render(request, 'buffete/listarcasosterminados.html',{'casos':casos})
@@ -59,8 +64,9 @@ def caso_editar(request, iden):
 @login_required
 def terminar_caso(request,iden):
     caso=get_object_or_404(Expediente,id=iden)
-    caso.terminar_caso()
-    return redirect('detalle_caso',iden=id)
+    caso.terminar()
+    caso.save()
+    return redirect('detalle_caso',iden=iden)
 
 @login_required
 def eliminar_cliente(request,id):
