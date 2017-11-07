@@ -6,6 +6,9 @@ class ExpedienteForm(forms.ModelForm):
     class Meta:
         model = Expediente
         fields = ('estado','resumen','descripcion','cliente','abogado','fecha_inicio','fecha_finalizacion')
+        #widget = forms.TextInput(
+        #attrs = {'class': 'summernote', 'name': 'subject'}
+        #)
 
 class AbogadoForm(forms.ModelForm):
     class Meta:
